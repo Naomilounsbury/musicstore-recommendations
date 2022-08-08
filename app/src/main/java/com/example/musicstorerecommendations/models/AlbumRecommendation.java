@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -16,23 +17,26 @@ public class AlbumRecommendation {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name="album_recommendation_id")
         private Integer id;
+        @NotNull(message="put in album id")
         @Column(name="album_id")
         private Integer albumId;
+        @NotNull(message="put in user id")
         @Column(name="user_id")
         private Integer userId;
-        private boolean liked;
+        @NotNull(message="put in number of likes")
+        private Boolean liked;
 
         public AlbumRecommendation() {
         }
 
-        public AlbumRecommendation(Integer id, Integer albumId, Integer userId, boolean liked) {
-                this.id = id;
+        public AlbumRecommendation(Integer albumId, Integer userId, Boolean liked) {
                 this.albumId = albumId;
                 this.userId = userId;
                 this.liked = liked;
         }
 
-        public AlbumRecommendation(Integer albumId, Integer userId, boolean liked) {
+        public AlbumRecommendation(Integer id, Integer albumId, Integer userId, Boolean liked) {
+                this.id = id;
                 this.albumId = albumId;
                 this.userId = userId;
                 this.liked = liked;
@@ -62,11 +66,11 @@ public class AlbumRecommendation {
                 this.userId = userId;
         }
 
-        public boolean isLiked() {
+        public Boolean getLiked() {
                 return liked;
         }
 
-        public void setLiked(boolean liked) {
+        public void setLiked(Boolean liked) {
                 this.liked = liked;
         }
 
@@ -75,7 +79,7 @@ public class AlbumRecommendation {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 AlbumRecommendation that = (AlbumRecommendation) o;
-                return liked == that.liked && Objects.equals(id, that.id) && Objects.equals(albumId, that.albumId) && Objects.equals(userId, that.userId);
+                return Objects.equals(id, that.id) && Objects.equals(albumId, that.albumId) && Objects.equals(userId, that.userId) && Objects.equals(liked, that.liked);
         }
 
         @Override

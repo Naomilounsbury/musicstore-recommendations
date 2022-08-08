@@ -3,6 +3,7 @@ package com.example.musicstorerecommendations.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -15,22 +16,25 @@ public class TrackRecommendation {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name="track_recommendation_id")
         private Integer id;
+        @NotNull(message="put in track id")
         @Column(name="track_id")
         private Integer trackId;
+        @NotNull(message="put in user id")
         @Column(name="user_id")
         private Integer userId;
-        private boolean liked;
+        @NotNull(message="put in number of likes")
+        private Boolean liked;
 
         public TrackRecommendation() {
         }
 
-        public TrackRecommendation(Integer trackId, Integer userId, boolean liked) {
+        public TrackRecommendation(Integer trackId, Integer userId, Boolean liked) {
                 this.trackId = trackId;
                 this.userId = userId;
                 this.liked = liked;
         }
 
-        public TrackRecommendation(Integer id, Integer trackId, Integer userId, boolean liked) {
+        public TrackRecommendation(Integer id, Integer trackId, Integer userId, Boolean liked) {
                 this.id = id;
                 this.trackId = trackId;
                 this.userId = userId;
@@ -61,11 +65,11 @@ public class TrackRecommendation {
                 this.userId = userId;
         }
 
-        public boolean isLiked() {
+        public Boolean getLiked() {
                 return liked;
         }
 
-        public void setLiked(boolean liked) {
+        public void setLiked(Boolean liked) {
                 this.liked = liked;
         }
 
@@ -74,7 +78,7 @@ public class TrackRecommendation {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 TrackRecommendation that = (TrackRecommendation) o;
-                return liked == that.liked && Objects.equals(id, that.id) && Objects.equals(trackId, that.trackId) && Objects.equals(userId, that.userId);
+                return Objects.equals(id, that.id) && Objects.equals(trackId, that.trackId) && Objects.equals(userId, that.userId) && Objects.equals(liked, that.liked);
         }
 
         @Override

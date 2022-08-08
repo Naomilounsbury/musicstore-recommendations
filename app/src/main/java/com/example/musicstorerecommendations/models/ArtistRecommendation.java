@@ -3,6 +3,8 @@ package com.example.musicstorerecommendations.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -13,23 +15,26 @@ public class ArtistRecommendation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="artist_recommendation_id")
     private Integer id;
+    @NotNull(message="put in artist id")
     @Column(name="artist_id")
     private Integer artistId;
     @Column(name="user_id")
+    @NotNull(message="put in user id")
     private Integer userId;
-    private boolean liked;
+    @NotNull(message="put in number of likes")
+    private Boolean liked;
 
     public ArtistRecommendation() {
     }
 
-    public ArtistRecommendation(Integer id, Integer artistId, Integer userId, boolean liked) {
-        this.id = id;
+    public ArtistRecommendation(Integer artistId, Integer userId, Boolean liked) {
         this.artistId = artistId;
         this.userId = userId;
         this.liked = liked;
     }
 
-    public ArtistRecommendation(Integer artistId, Integer userId, boolean liked) {
+    public ArtistRecommendation(Integer id, Integer artistId, Integer userId, Boolean liked) {
+        this.id = id;
         this.artistId = artistId;
         this.userId = userId;
         this.liked = liked;
@@ -59,11 +64,11 @@ public class ArtistRecommendation {
         this.userId = userId;
     }
 
-    public boolean isLiked() {
+    public Boolean getLiked() {
         return liked;
     }
 
-    public void setLiked(boolean liked) {
+    public void setLiked(Boolean liked) {
         this.liked = liked;
     }
 
@@ -72,7 +77,7 @@ public class ArtistRecommendation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ArtistRecommendation that = (ArtistRecommendation) o;
-        return liked == that.liked && Objects.equals(id, that.id) && Objects.equals(artistId, that.artistId) && Objects.equals(userId, that.userId);
+        return Objects.equals(id, that.id) && Objects.equals(artistId, that.artistId) && Objects.equals(userId, that.userId) && Objects.equals(liked, that.liked);
     }
 
     @Override

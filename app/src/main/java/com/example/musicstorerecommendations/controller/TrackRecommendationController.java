@@ -43,7 +43,7 @@ public class TrackRecommendationController {
         }
         @RequestMapping(value = "/trackRecommendation/{id}", method = RequestMethod.PUT)
         @ResponseStatus(value = HttpStatus.OK)
-        public TrackRecommendation updateTrackRecommendation(@RequestBody TrackRecommendation track, @PathVariable Integer id){
+        public TrackRecommendation updateTrackRecommendation(@Valid @RequestBody TrackRecommendation track, @PathVariable Integer id){
             if (track.getId() == null) {
                 track.setId(id);
             } else if (track.getId() != id) {

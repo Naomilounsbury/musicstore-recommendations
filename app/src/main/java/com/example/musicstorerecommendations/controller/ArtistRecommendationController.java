@@ -49,7 +49,7 @@ public class ArtistRecommendationController {
     }
     @RequestMapping(value = "/artistRecommendation/{id}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public ArtistRecommendation updateArtistRecommendation(@RequestBody ArtistRecommendation artist, @PathVariable Integer id){
+    public ArtistRecommendation updateArtistRecommendation(@Valid @RequestBody ArtistRecommendation artist, @PathVariable Integer id){
         if (artist.getId() == null) {
             artist.setId(id);
         } else if (artist.getId() != id) {

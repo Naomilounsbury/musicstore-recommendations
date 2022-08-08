@@ -19,7 +19,7 @@ public class LabelRecommendationController {
 
         @RequestMapping(value = "/labelRecommendation", method = RequestMethod.POST)
         @ResponseStatus(value = HttpStatus.CREATED)
-        public LabelRecommendation createLabelRecommendation(@RequestBody LabelRecommendation label) {
+        public LabelRecommendation createLabelRecommendation(@Valid @RequestBody LabelRecommendation label) {
             return repo.save(label);
         }
         @RequestMapping(value = "/labelRecommendation", method = RequestMethod.GET)
@@ -44,7 +44,7 @@ public class LabelRecommendationController {
         }
         @RequestMapping(value = "/labelRecommendation/{id}", method = RequestMethod.PUT)
         @ResponseStatus(value = HttpStatus.OK)
-        public LabelRecommendation updateLabelRecommendation(@RequestBody LabelRecommendation label, @PathVariable Integer id){
+        public LabelRecommendation updateLabelRecommendation(@Valid @RequestBody LabelRecommendation label, @PathVariable Integer id){
             if (label.getId() == null) {
                 label.setId(id);
             } else if (label.getId() != id) {

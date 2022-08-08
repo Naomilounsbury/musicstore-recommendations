@@ -24,7 +24,7 @@ public class AlbumRecommendationController {
 
     @RequestMapping(value = "/albumRecommendation", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public AlbumRecommendation createAlbumRecommendation(@RequestBody AlbumRecommendation album) {
+    public AlbumRecommendation createAlbumRecommendation(@Valid @RequestBody AlbumRecommendation album) {
         return repo.save(album);
     }
 
@@ -50,7 +50,7 @@ public class AlbumRecommendationController {
     }
     @RequestMapping(value = "/albumRecommendation/{id}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public AlbumRecommendation updateAlbumRecommendation(@RequestBody AlbumRecommendation album, @PathVariable Integer id){
+    public AlbumRecommendation updateAlbumRecommendation(@Valid @RequestBody AlbumRecommendation album, @PathVariable Integer id){
         if (album.getId() == null) {
             album.setId(id);
         } else if (album.getId() != id) {
